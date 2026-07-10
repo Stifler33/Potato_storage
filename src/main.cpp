@@ -1,29 +1,38 @@
 #include <Arduino.h>
-#include <stifler_relay.h>
-#include <GTimer.h>
+// #include <stifler_relay.h>
+// #include <GTimer.h>
 
-GTimer<millis> pause(1000, true, GTMode::Interval);
+/*
+ * Displays text sent over the serial port (e.g. from the Serial Monitor) on
+ * an attached LCD.
+ * YWROBOT
+ *Compatible with the Arduino IDE 1.0
+ *Library version:1.1
+ */
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
 
-Stifler_relay rl(3, 11, 10);
-void setup() {
-  
-  // Пины D3 и D11 - 31.4 кГц
-  TCCR2B = 0b00000001;  // x1
-  TCCR2A = 0b00000001;  // phase correct
+LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
-  // Пины D9 и D10 - 31.4 кГц
-  TCCR1B = 0b00000001;  // x1 phase correct
-  TCCR1A = 0b00000001;  // 8bit
-  
+void setup()
+{
+  lcd.init();                      // initialize the lcd 
+  lcd.backlight();
+  Serial.begin(9600);
 }
 
-void loop() {
-  rl.loop();
-  if (pause){
-    if (!rl.hot.state){
-      rl.hot.on();
-    }else{
-      rl.hot.off();
+void loop()
+{
+  // when characters arrive over the serial port...
+  if (Serial.available()) {
+    // wait a bit for the entire message to arrive
+    delay(100);
+    // clear the screen
+    lcd.clear();
+    // read all the available characters
+    while (Serial.available() > 0) {
+      // display each character to the LCD
+      lcd.write(Serial.read());
     }
   }
 }
