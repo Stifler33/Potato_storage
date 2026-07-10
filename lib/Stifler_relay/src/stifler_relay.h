@@ -9,6 +9,7 @@ class Stifler_relay{
         void loop();
         class Ventilation{
             public:
+            uint8_t pin;
             void on();
             void off();
             bool state;
@@ -16,6 +17,7 @@ class Stifler_relay{
 
         class Hot{
             public:
+            uint8_t pin;
             void on();
             void off();
             bool state;
@@ -23,6 +25,7 @@ class Stifler_relay{
 
         class Humidity{
             public:
+            uint8_t pin;
             void on();
             void off();
             bool state;
@@ -31,9 +34,4 @@ class Stifler_relay{
         Humidity humidity;
         Hot hot;
         Ventilation ventilation;
-    private:
-    uint8_t pin_ventilation;
-    uint8_t pin_humidity;
-    uint8_t pin_hot;
-        
 };
