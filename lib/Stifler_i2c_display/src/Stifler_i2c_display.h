@@ -18,6 +18,8 @@ class Stifler_display{
         B00000,
     };
     LCD_1602_RUS lcd;
+    float temp;
+    float humidity;
     Stifler_display();
     void init();
     void print_cels();
@@ -26,5 +28,8 @@ class Stifler_display{
     void off_backlight();
     void print_temp(float temp);
     void print_humidity(float humidity);
+    void menu_main();
+    void menu_settings();
+    void update_data();
     
 };

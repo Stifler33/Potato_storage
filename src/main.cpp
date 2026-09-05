@@ -1,21 +1,26 @@
 #include <Arduino.h>
 #include <Stifler_i2c_display.h>
+#include <EncButton.h>
 
 Stifler_display lcd;
 
+#define SW 2
+#define CLK 8
+#define DT 7
+EncButton eb(DT, CLK, SW);
+float temp_potato = 5.6;
 void setup() {
   lcd.init();
-  lcd.on_backlight();
-  lcd.print_heading();
-  lcd.print_cels();
-  lcd.print_temp(23.6);
-  lcd.print_humidity(50.5);
+  lcd.humidity = 53.2;
+  lcd.temp = 23.6;
+  lcd.menu_main();
   Serial.begin(115200);
 }
 
 void loop() {
-  for(float i = 26.3; i < 80; i++){
-    lcd.print_temp(i);
-    delay(1000);
+  eb.tick();
+  if (eb.release()){
+    Serial.println(eb.getClicks());
   }
+
 }
