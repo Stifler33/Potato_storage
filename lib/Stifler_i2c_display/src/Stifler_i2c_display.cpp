@@ -33,7 +33,7 @@ void Stifler_display::print_temp(float temp){
 }
 
 void Stifler_display::print_humidity(float humidity){
-    lcd.setCursor(7, 1);
+    lcd.setCursor(8, 1);
     lcd.write(6);
     lcd.setCursor(9, 1);
     lcd.print(String(humidity));
