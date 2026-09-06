@@ -42,6 +42,8 @@ void Stifler_display::print_humidity(float humidity){
 }
 
 void Stifler_display::menu_main(){
+    lcd.clear();
+
     lcd.setCursor(0,0);
     lcd.print("Текущие данные");
 
@@ -49,23 +51,38 @@ void Stifler_display::menu_main(){
     lcd.print("C");
 
     lcd.setCursor(8, 1);
+    lcd.createChar(6, symbol_humidity);
     lcd.write(6);
 
     update_data();
 }
 
-void Stifler_display::menu_settings(){
+void Stifler_display::menu_relay_1(){
     lcd.clear();
     lcd.setCursor(0,0);
-    lcd.print("Настройки");
+    lcd.print("Настройки реле 1");
 }
+
+void Stifler_display::menu_relay_2(){
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Настройки реле 2");
+}
+
+void Stifler_display::menu_relay_3(){
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Настройки реле 3");
+}
+
+
 
 void Stifler_display::update_data(){
     lcd.setCursor(2, 1);
     lcd.print(String(temp));
 
-    lcd.setCursor(8, 1);
-    lcd.write(6);
+    // lcd.setCursor(8, 1);
+    // lcd.write(6);
 
     lcd.setCursor(9, 1);
     lcd.print(String(humidity));

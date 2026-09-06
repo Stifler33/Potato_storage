@@ -29,7 +29,9 @@ class Stifler_display{
     void print_temp(float temp);
     void print_humidity(float humidity);
     void menu_main();
-    void menu_settings();
+    void menu_relay_3();
+    void menu_relay_2();
+    void menu_relay_1();
     void update_data();
     
 };
