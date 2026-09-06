@@ -20,7 +20,11 @@ void setup() {
 void loop() {
   eb.tick();
   if (eb.release()){
-    Serial.println(eb.getClicks());
+    uint8_t clicks = eb.getClicks();
+    if (clicks == 2){
+      lcd.menu_settings();
+    }
+    Serial.println(clicks);
   }
 
 }
