@@ -3,6 +3,11 @@
 Stifler_display::Stifler_display(): lcd(0x27, 16, 2){
     temp=0.0;
     humidity=0.0;
+    main.lcd = &lcd;
+    main.name_display = "main";
+    main.text_heading = "Текущие данные";
+    main.text_value_1 = "C";
+    main.text_value_2 = "H";
 }
 
 void Stifler_display::init(){

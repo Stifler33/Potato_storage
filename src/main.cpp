@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include <Stifler_i2c_display.h>
 #include <EncButton.h>
+#include <relay.h>
 
+// Potato_Relay rl(1, 2, 3);
 Stifler_display lcd;
-
 #define SW 2
 #define CLK 8
 #define DT 7
@@ -29,64 +30,65 @@ void setup() {
   lcd.init();
   lcd.humidity = 53.2;
   lcd.temp = 23.6;
-  lcd.menu_main();
+  // lcd.menu_main();
+  lcd.main.show();
   Serial.begin(115200);
 }
 bool flag_ = false;
 void loop() {
-  eb.tick();
+  // eb.tick();
 
-  if (eb.hold()){
-    // Serial.println("hold button");
+  // if (eb.hold()){
+  //   // Serial.println("hold button");
 
-    counter_sets++;
-    if (counter_sets > sets_down){
-      counter_sets = sets_up;
-    }
+  //   counter_sets++;
+  //   if (counter_sets > sets_down){
+  //     counter_sets = sets_up;
+  //   }
 
-    switch (counter_sets)
-    {
-    case sets_up:
-      Serial.println("sers_up");
-      break;
+  //   switch (counter_sets)
+  //   {
+  //   case sets_up:
+  //     Serial.println("sers_up");
+  //     break;
     
-    case sets_down:
-      Serial.println("sets_down");
-      break;
+  //   case sets_down:
+  //     Serial.println("sets_down");
+  //     break;
 
-    default:
-      break;
-    }
-  }
+  //   default:
+  //     break;
+  //   }
+  // }
   
-  if (eb.click()){
-    counter_menu += 1;
-    if(counter_menu > menu_rl_3){
-      counter_menu = menu_main;
-    }
+  // if (eb.click()){
+  //   counter_menu += 1;
+  //   if(counter_menu > menu_rl_3){
+  //     counter_menu = menu_main;
+  //   }
 
-    switch (counter_menu)
-    {
-    case menu_main:
-      lcd.menu_main();
-      break;
+  //   switch (counter_menu)
+  //   {
+  //   case menu_main:
+  //     lcd.menu_main();
+  //     break;
 
-    case menu_rl_1:
-      lcd.menu_relay_1();
-      break;
+  //   case menu_rl_1:
+  //     lcd.menu_relay_1();
+  //     break;
 
-    case menu_rl_2:
-      lcd.menu_relay_2();
-      break;
+  //   case menu_rl_2:
+  //     lcd.menu_relay_2();
+  //     break;
 
-    case menu_rl_3:
-      lcd.menu_relay_3();
-      break;
+  //   case menu_rl_3:
+  //     lcd.menu_relay_3();
+  //     break;
     
-    default:
-      break;
-    }
-  }
+  //   default:
+  //     break;
+  //   }
+  // }
 
 
 }

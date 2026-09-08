@@ -4,6 +4,16 @@
 #define _LCD_TYPE 1
 #include <LCD_1602_RUS_ALL.h>
 
+class Only_Display{
+    public:
+        LCD_1602_RUS *lcd;
+        String name_display;
+        String text_heading;
+        String text_value_1;
+        String text_value_2;
+        void print_value(float value_1, float value_2);
+        void show();
+};
 
 class Stifler_display{
     public:
@@ -18,6 +28,7 @@ class Stifler_display{
         B00000,
     };
     LCD_1602_RUS lcd;
+    Only_Display main;
     float temp;
     float humidity;
     Stifler_display();
