@@ -27,6 +27,7 @@ void Stifler_display::update_data(){
 }
 
 void Stifler_display::show_main(){
+    lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Current Data");
     lcd.setCursor(0,1);
@@ -36,6 +37,7 @@ void Stifler_display::show_main(){
 }
 
 void Stifler_display::show_rl_1(){
+    lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Settings relay 1");
     lcd.setCursor(0, 1);
@@ -45,10 +47,53 @@ void Stifler_display::show_rl_1(){
     lcd.print("offC");
     lcd.write(62);
 }
+void Stifler_display::show_rl_2(){
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Settings relay 2");
+    lcd.setCursor(0, 1);
+    lcd.print("on");
+    lcd.write(0);
+    lcd.write(60);
+    lcd.setCursor(7, 1);
+    lcd.print("off");
+    lcd.write(0);
+    lcd.write(62);
+}
+void Stifler_display::show_rl_3(){
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Settings relay 3");
+    lcd.setCursor(0, 1);
+    lcd.print("onC");
+    lcd.write(60);
+    lcd.setCursor(7, 1);
+    lcd.print("offC");
+    lcd.write(62);
+}
 
 void Stifler_display::update_rl_1(int value_on, int value_off){
-    lcd.setCursor(4,1);
-    lcd.print(String(value_on));
-    lcd.setCursor(12,1);
-    lcd.print(String(value_off));
+    if (value_on > 0){
+        lcd.setCursor(4,1);
+        lcd.print(String(value_on));
+    }
+
+    if (value_off > 0){
+        lcd.setCursor(12,1);
+        lcd.print(String(value_off));
+    }
+}
+
+void Stifler_display::show_indicator(String type){
+    if (type == "up"){
+        lcd.setCursor(14,1);
+        lcd.write(16);
+        lcd.setCursor(6, 1);
+    }
+    if (type == "down"){
+        lcd.setCursor(6, 1);
+        lcd.write(16);
+        lcd.setCursor(14,1);
+    }
+    lcd.write(127);
 }
