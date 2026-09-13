@@ -30,11 +30,13 @@ void setup() {
   lcd.init();
   lcd.humidity = 53.2;
   lcd.temp = 23.6;
-  // lcd.menu_main();
   lcd.main.show();
+  lcd.main.print_value(lcd.temp, lcd.humidity);
   Serial.begin(115200);
 }
+
 bool flag_ = false;
+
 void loop() {
   // eb.tick();
 

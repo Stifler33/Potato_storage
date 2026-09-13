@@ -5,20 +5,18 @@ Stifler_display::Stifler_display(): lcd(0x27, 16, 2){
     humidity=0.0;
     main.lcd = &lcd;
     main.name_display = "main";
-    main.text_heading = "Текущие данные";
+    main.text_heading = "Current data";
     main.text_value_1 = "C";
     main.text_value_2 = "H";
+    settings_rl_1.name_display = "rl_1";
+    settings_rl_1.text_heading = "settings rl 1";
+    settings_rl_1.text_value_1 = "C";
 }
 
 void Stifler_display::init(){
     lcd.init();
-    lcd.createChar(6, symbol_humidity);
+    lcd.createChar(0, charHumidity);
     on_backlight();
-}
-
-void Stifler_display::print_cels(){
-    lcd.setCursor(0, 1);
-    lcd.print("C");
 }
 
 void Stifler_display::on_backlight(){
@@ -28,59 +26,6 @@ void Stifler_display::on_backlight(){
 void Stifler_display::off_backlight(){
     lcd.noBacklight();
 }
-
-void Stifler_display::print_heading(){
-    lcd.setCursor(0,0);
-    lcd.print("Текущие данные");
-}
-
-void Stifler_display::print_temp(float temp){
-    lcd.setCursor(2, 1);
-    lcd.print(String(temp));
-}
-
-void Stifler_display::print_humidity(float humidity){
-    lcd.setCursor(8, 1);
-    lcd.write(6);
-    lcd.setCursor(9, 1);
-    lcd.print(String(humidity));
-}
-
-void Stifler_display::menu_main(){
-    lcd.clear();
-
-    lcd.setCursor(0,0);
-    lcd.print("Текущие данные");
-
-    lcd.setCursor(0, 1);
-    lcd.print("C");
-
-    lcd.setCursor(8, 1);
-    lcd.createChar(6, symbol_humidity);
-    lcd.write(6);
-
-    update_data();
-}
-
-void Stifler_display::menu_relay_1(){
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Настройки реле 1");
-}
-
-void Stifler_display::menu_relay_2(){
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Настройки реле 2");
-}
-
-void Stifler_display::menu_relay_3(){
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Настройки реле 3");
-}
-
-
 
 void Stifler_display::update_data(){
     lcd.setCursor(2, 1);

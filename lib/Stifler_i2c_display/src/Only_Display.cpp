@@ -13,6 +13,6 @@ void Only_Display::show(){
 void Only_Display::print_value(float value_1, float value_2){
     lcd->setCursor(2, 1);
     lcd->print(String(value_1));
-    lcd->setCursor(9, 1);
+    lcd->setCursor(10, 1);
     lcd->print(String(value_2));
 }
