@@ -1,10 +1,8 @@
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 #include <Arduino.h>
-#define _LCD_TYPE 1
-#include <LCD_1602_RUS_ALL.h>
-
-ё
+// #define _LCD_TYPE 1
+// #include <LCD_1602_RUS_ALL.h>
 
 class Stifler_display{
     public:
@@ -19,10 +17,6 @@ class Stifler_display{
     0x00
     };
     LiquidCrystal_I2C lcd;
-    Only_Display main;
-    Only_Display settings_rl_1;
-    Only_Display settings_rl_2;
-    Only_Display settings_rl_3;
     float temp;
     float humidity;
     Stifler_display();
@@ -30,5 +24,8 @@ class Stifler_display{
     void on_backlight();
     void off_backlight();
     void update_data();
+    void show_main();
+    void show_rl_1();
+    void update_rl_1(int value_on, int value_off);
     
 };

@@ -3,14 +3,6 @@
 Stifler_display::Stifler_display(): lcd(0x27, 16, 2){
     temp=0.0;
     humidity=0.0;
-    main.lcd = &lcd;
-    main.name_display = "main";
-    main.text_heading = "Current data";
-    main.text_value_1 = "C";
-    main.text_value_2 = "H";
-    settings_rl_1.name_display = "rl_1";
-    settings_rl_1.text_heading = "settings rl 1";
-    settings_rl_1.text_value_1 = "C";
 }
 
 void Stifler_display::init(){
@@ -30,10 +22,33 @@ void Stifler_display::off_backlight(){
 void Stifler_display::update_data(){
     lcd.setCursor(2, 1);
     lcd.print(String(temp));
-
-    // lcd.setCursor(8, 1);
-    // lcd.write(6);
-
-    lcd.setCursor(9, 1);
+    lcd.setCursor(10, 1);
     lcd.print(String(humidity));
+}
+
+void Stifler_display::show_main(){
+    lcd.setCursor(0,0);
+    lcd.print("Current Data");
+    lcd.setCursor(0,1);
+    lcd.print("C");
+    lcd.setCursor(8,1);
+    lcd.write(0);
+}
+
+void Stifler_display::show_rl_1(){
+    lcd.setCursor(0,0);
+    lcd.print("Settings relay 1");
+    lcd.setCursor(0, 1);
+    lcd.print("onC");
+    lcd.write(60);
+    lcd.setCursor(7, 1);
+    lcd.print("offC");
+    lcd.write(62);
+}
+
+void Stifler_display::update_rl_1(int value_on, int value_off){
+    lcd.setCursor(4,1);
+    lcd.print(String(value_on));
+    lcd.setCursor(12,1);
+    lcd.print(String(value_off));
 }

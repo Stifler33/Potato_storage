@@ -30,15 +30,17 @@ void setup() {
   lcd.init();
   lcd.humidity = 53.2;
   lcd.temp = 23.6;
-  lcd.main.show();
-  lcd.main.print_value(lcd.temp, lcd.humidity);
   Serial.begin(115200);
+  lcd.show_rl_1();
+  lcd.update_rl_1(5, 10);
+  // lcd.show_main();
+  // lcd.update_data();
 }
 
 bool flag_ = false;
 
 void loop() {
-  // eb.tick();
+  eb.tick();
 
   // if (eb.hold()){
   //   // Serial.println("hold button");
