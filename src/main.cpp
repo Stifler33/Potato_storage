@@ -7,11 +7,11 @@
 // Potato_Relay rl(1, 2, 3);
 
 #define ADR_RL_1_UP 0
-#define ADR_RL_1_DOWN 1
-#define ADR_RL_2_UP 2
-#define ADR_RL_2_DOWN 3
-#define ADR_RL_3_UP 4
-#define ADR_RL_3_DOWN 5
+#define ADR_RL_1_DOWN 2
+#define ADR_RL_2_UP 4
+#define ADR_RL_2_DOWN 6
+#define ADR_RL_3_UP 8
+#define ADR_RL_3_DOWN 10
 
 Stifler_display lcd;
 #define SW 2
@@ -25,8 +25,8 @@ float sets_temp_up = 0.0;
 uint8_t counter_menu = 0;
 uint8_t counter_sets = 0;
 
-uint8_t value_rl_1_up = 0;
-uint8_t value_rl_1_down = 0;
+int16_t value_rl_1_up = 0;
+int16_t value_rl_1_down = 0;
 
 enum{
   sets_up,
@@ -64,15 +64,15 @@ void setup() {
   lcd.temp = 23.6;
   Serial.begin(115200);
   lcd.show_main();
-  EEPROM.put(ADR_RL_1_DOWN, 0);
-  EEPROM.put(ADR_RL_1_UP, 0);
-  EEPROM.put(ADR_RL_2_DOWN, 0);
-  EEPROM.put(ADR_RL_2_UP, 0);
-  EEPROM.put(ADR_RL_3_DOWN, 0);
-  EEPROM.put(ADR_RL_3_UP, 0);
+  // EEPROM.put(ADR_RL_1_DOWN, 0);
+  // EEPROM.put(ADR_RL_1_UP, 0);
+  // EEPROM.put(ADR_RL_2_DOWN, 0);
+  // EEPROM.put(ADR_RL_2_UP, 0);
+  // EEPROM.put(ADR_RL_3_DOWN, 0);
+  // EEPROM.put(ADR_RL_3_UP, 0);
 
-  // EEPROM.get(ADR_RL_1_UP, value_rl_1_up);
-  // EEPROM.get(ADR_RL_1_DOWN, value_rl_1_down);
+  EEPROM.get(ADR_RL_1_UP, value_rl_1_up);
+  EEPROM.get(ADR_RL_1_DOWN, value_rl_1_down);
 }
 
 bool flag_ = false;
