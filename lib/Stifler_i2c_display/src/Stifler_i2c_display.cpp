@@ -73,14 +73,21 @@ void Stifler_display::show_rl_3(){
 }
 
 void Stifler_display::update_rl_1(int value_on, int value_off){
+
     if (value_on > 0){
         lcd.setCursor(4,1);
         lcd.print(String(value_on));
+        if (value_on == 9){
+            lcd.print(" ");
+        }
     }
 
     if (value_off > 0){
         lcd.setCursor(12,1);
         lcd.print(String(value_off));
+        if (value_off == 9){
+            lcd.print(" ");
+        }
     }
 }
 

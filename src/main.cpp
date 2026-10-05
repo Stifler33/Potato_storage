@@ -35,6 +35,20 @@ enum{
 //   select_rl_2
 // };
 
+void select_sets(){
+    switch(counter_sets)
+  {
+    case sets_up:
+      lcd.show_indicator("up");
+      break;
+    case sets_down:
+      lcd.show_indicator("down");
+      break;
+    default:
+      break;
+  }
+}
+
 void setup() {
   lcd.init();
   lcd.humidity = 53.2;
@@ -106,7 +120,7 @@ void loop() {
     Serial.print(", fast ");
     Serial.print(eb.fast());
     Serial.print(", counter ");
-    Serial.print(eb.counter);
+    Serial.println(eb.counter);
     switch (counter_menu)
     {
     case menu_rl_1:
