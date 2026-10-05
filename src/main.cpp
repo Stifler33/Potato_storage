@@ -64,8 +64,15 @@ void setup() {
   lcd.temp = 23.6;
   Serial.begin(115200);
   lcd.show_main();
-  EEPROM.get(ADR_RL_1_UP, value_rl_1_up);
-  EEPROM.get(ADR_RL_1_DOWN, value_rl_1_down);
+  EEPROM.put(ADR_RL_1_DOWN, 0);
+  EEPROM.put(ADR_RL_1_UP, 0);
+  EEPROM.put(ADR_RL_2_DOWN, 0);
+  EEPROM.put(ADR_RL_2_UP, 0);
+  EEPROM.put(ADR_RL_3_DOWN, 0);
+  EEPROM.put(ADR_RL_3_UP, 0);
+
+  // EEPROM.get(ADR_RL_1_UP, value_rl_1_up);
+  // EEPROM.get(ADR_RL_1_DOWN, value_rl_1_down);
 }
 
 bool flag_ = false;
