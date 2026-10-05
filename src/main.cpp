@@ -29,12 +29,6 @@ enum{
   menu_rl_3
 };
 
-// enum{
-//   unselect,
-//   select_rl_1,
-//   select_rl_2
-// };
-
 void select_sets(){
     switch(counter_sets)
   {
@@ -55,9 +49,6 @@ void setup() {
   lcd.temp = 23.6;
   Serial.begin(115200);
   lcd.show_main();
-  // lcd.update_rl_1(5, 10);
-  // lcd.show_main();
-  // lcd.update_data();
 }
 
 bool flag_ = false;
@@ -71,17 +62,7 @@ void loop() {
       counter_sets = sets_up;
     }
     if (counter_menu > menu_main){
-      switch(counter_sets)
-      {
-        case sets_up:
-          lcd.show_indicator("up");
-          break;
-        case sets_down:
-          lcd.show_indicator("down");
-          break;
-        default:
-          break;
-      }
+      select_sets();
     }
   }
   
@@ -99,14 +80,17 @@ void loop() {
 
     case menu_rl_1:
       lcd.show_rl_1();
+      select_sets();
       break;
 
     case menu_rl_2:
       lcd.show_rl_2();
+      select_sets();
       break;
 
     case menu_rl_3:
       lcd.show_rl_3();
+      select_sets();
       break;
     
     default:

@@ -65,10 +65,12 @@ void Stifler_display::show_rl_3(){
     lcd.setCursor(0,0);
     lcd.print("Settings relay 3");
     lcd.setCursor(0, 1);
-    lcd.print("onC");
+    lcd.print("on");
+    lcd.write(0);
     lcd.write(60);
     lcd.setCursor(7, 1);
-    lcd.print("offC");
+    lcd.print("off");
+    lcd.write(0);
     lcd.write(62);
 }
 
