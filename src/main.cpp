@@ -28,6 +28,9 @@ uint8_t counter_sets = 0;
 int16_t value_rl_1_up = 0;
 int16_t value_rl_1_down = 0;
 
+int16_t value_rl_2_up = 0;
+int16_t value_rl_2_down = 0;
+
 enum{
   sets_up,
   sets_down
@@ -54,9 +57,6 @@ void select_sets(){
   }
 }
 
-void save_sets(uint8_t value, uint8_t adr){
-  EEPROM.put(adr, value);
-}
 
 void setup() {
   lcd.init();
@@ -67,6 +67,9 @@ void setup() {
 
   EEPROM.get(ADR_RL_1_UP, value_rl_1_up);
   EEPROM.get(ADR_RL_1_DOWN, value_rl_1_down);
+
+  EEPROM.get(ADR_RL_2_UP, value_rl_2_up);
+  EEPROM.get(ADR_RL_2_DOWN, value_rl_2_down);
 }
 
 bool flag_ = false;
