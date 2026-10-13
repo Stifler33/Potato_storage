@@ -28,7 +28,9 @@ class Stifler_display{
     void show_rl_1();
     void show_rl_2();
     void show_rl_3();
-    void update_rl_1(int value_on=0, int value_off=0);
+    void update_rl(int value_on=0, int value_off=0);
+    // void update_rl_2(int value_on=0, int value_off=0);
+    // void update_rl_3(int value_on=0, int value_off=0);
     void show_indicator(String type);
     
 };

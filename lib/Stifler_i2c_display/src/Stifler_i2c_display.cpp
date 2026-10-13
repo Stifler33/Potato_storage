@@ -74,7 +74,7 @@ void Stifler_display::show_rl_3(){
     lcd.write(62);
 }
 
-void Stifler_display::update_rl_1(int value_on, int value_off){
+void Stifler_display::update_rl(int value_on, int value_off){
 
     if (value_on > 0){
         lcd.setCursor(4,1);
