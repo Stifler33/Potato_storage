@@ -26,6 +26,11 @@ void Stifler_display::update_data(){
     lcd.print(String(humidity));
 }
 
+void Stifler_display::print_error_aht(){
+    lcd.setCursor(0, 1);
+    lcd.print("Sensors Error    ");
+}
+
 void Stifler_display::show_main(){
     lcd.clear();
     lcd.setCursor(0,0);

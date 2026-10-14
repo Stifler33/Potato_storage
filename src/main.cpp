@@ -40,6 +40,8 @@ int16_t value_rl_2_down = 0;
 int16_t value_rl_3_up = 0;
 int16_t value_rl_3_down = 0;
 
+bool detach_sensor = false;
+
 enum{
   sets_up,
   sets_down
@@ -83,6 +85,8 @@ void setup() {
 
   EEPROM.get(ADR_RL_3_UP, value_rl_3_up);
   EEPROM.get(ADR_RL_3_DOWN, value_rl_3_down);
+
+  Serial.begin(9600);
 }
 
 bool flag_ = false;
@@ -91,10 +95,26 @@ void loop() {
   eb.tick();
 
   if (counter_menu == menu_main){
-    lcd.update_data();
     if (delay_aht){
+      Serial.println("delay_aht");
       sensors_event_t humidity, temp;
-      aht.getEvent(&humidity, &temp);
+
+      if (detach_sensor){
+        if (aht.begin()){
+          Serial.println("sensor connect");
+          detach_sensor = false;
+          lcd.init();
+          lcd.show_main();
+        }
+      }
+
+      if (!aht.getEvent(&humidity, &temp)){
+        lcd.print_error_aht();
+        Serial.println("sensor detach");
+        detach_sensor = true;
+      }else{
+        lcd.update_data();
+      }
 
       lcd.temp = temp.temperature;
       lcd.humidity = humidity.relative_humidity;

@@ -24,6 +24,7 @@ class Stifler_display{
     void on_backlight();
     void off_backlight();
     void update_data();
+    void print_error_aht();
     void show_main();
     void show_rl_1();
     void show_rl_2();
