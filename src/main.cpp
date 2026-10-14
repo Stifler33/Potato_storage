@@ -3,6 +3,12 @@
 #include <EncButton.h>
 #include <relay.h>
 #include <EEPROM.h>
+#include <Adafruit_AHTX0.h>
+#include <GTimer.h>
+
+GTimer<millis> delay_aht(500, true, GTMode::Interval);
+
+Adafruit_AHTX0 aht;
 
 // Potato_Relay rl(1, 2, 3);
 
@@ -67,6 +73,7 @@ void setup() {
   lcd.temp = 23.6;
   Serial.begin(115200);
   lcd.show_main();
+  aht.begin();
 
   EEPROM.get(ADR_RL_1_UP, value_rl_1_up);
   EEPROM.get(ADR_RL_1_DOWN, value_rl_1_down);
@@ -82,6 +89,17 @@ bool flag_ = false;
 
 void loop() {
   eb.tick();
+
+  if (counter_menu == menu_main){
+    lcd.update_data();
+    if (delay_aht){
+      sensors_event_t humidity, temp;
+      aht.getEvent(&humidity, &temp);
+
+      lcd.temp = temp.temperature;
+      lcd.humidity = humidity.relative_humidity;
+    }
+  }
 
   if (eb.hold()){
     counter_sets++;
