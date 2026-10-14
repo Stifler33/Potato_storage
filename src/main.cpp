@@ -7,6 +7,7 @@
 #include <GTimer.h>
 
 GTimer<millis> delay_aht(500, true, GTMode::Interval);
+GTimer<millis> timer_backlight(10000, false, GTMode::Timeout);
 
 Adafruit_AHTX0 aht;
 
@@ -87,12 +88,17 @@ void setup() {
   EEPROM.get(ADR_RL_3_DOWN, value_rl_3_down);
 
   Serial.begin(9600);
+  timer_backlight.start();
 }
 
 bool flag_ = false;
 
 void loop() {
   eb.tick();
+
+  if (timer_backlight){
+    lcd.off_backlight();
+  }
 
   if (counter_menu == menu_main){
     if (delay_aht){
@@ -109,19 +115,20 @@ void loop() {
       }
 
       if (!aht.getEvent(&humidity, &temp)){
+        lcd.on_backlight();
         lcd.print_error_aht();
         Serial.println("sensor detach");
         detach_sensor = true;
       }else{
+        lcd.temp = temp.temperature;
+        lcd.humidity = humidity.relative_humidity;
         lcd.update_data();
       }
-
-      lcd.temp = temp.temperature;
-      lcd.humidity = humidity.relative_humidity;
     }
   }
 
   if (eb.hold()){
+    timer_backlight.start();
     counter_sets++;
     if (counter_sets > sets_down){
       counter_sets = sets_up;
@@ -132,6 +139,8 @@ void loop() {
   }
   
   if (eb.click()){
+    timer_backlight.start();
+    lcd.on_backlight();
     counter_menu += 1;
     if(counter_menu > menu_rl_3){
       counter_menu = menu_main;
@@ -173,7 +182,8 @@ void loop() {
   }
 
   if (eb.turn()) {
-
+    timer_backlight.start();
+    lcd.on_backlight();
     if (counter_sets == sets_up){
 
       if (counter_menu == menu_rl_1){
